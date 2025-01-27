@@ -1,0 +1,32 @@
+.navbar{
+    width: 100%;
+    box-shadow:0 8px 16px 0 rgba(0,0,0,0.2);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    position: fixed;
+    height: 7vh;
+}
+.left_nav{
+    display: flex;
+}
+
+.login_nav{
+
+    padding-right: 2rem;
+}
+
+.right_nav{
+    display: flex;
+    padding-right: 2rem;
+}
+
+.websiteName{
+
+    padding: 1rem;
+}
+
+.container{
+    display: flex;
+    flex-direction: column;
+}

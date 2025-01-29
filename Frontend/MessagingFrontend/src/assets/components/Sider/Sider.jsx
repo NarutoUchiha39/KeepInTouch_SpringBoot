@@ -1,4 +1,4 @@
-import { Outlet } from "react-router"
+import { Outlet, useNavigate } from "react-router"
 import "./Sider.css"
 import { LogoutOutlined,BellFilled,PlusCircleFilled } from "@ant-design/icons"
 import AddFriend from "../AddFriend/AddFriend"
@@ -7,6 +7,7 @@ import { TailSpin } from "react-loader-spinner"
 
 function Sider(props) {
   const [visible,setVisible] = useState(false)
+  let navigate = useNavigate()
 
   return (
     <div className="sider_container">
@@ -59,8 +60,8 @@ function Sider(props) {
                 <PlusCircleFilled style={{cursor:"pointer",fontSize:"1.5rem",color:"white",fontWeight:"bold"}}/>
             </div>
             
-            <div  >
-              <BellFilled style={{fontSize:"1.5rem",color:"white",fontWeight:"bold"}} />
+            <div className="checkFriendRequest" onClick={()=>(navigate("/checkRequests"))} >
+              <BellFilled style={{fontSize:"1.5rem",color:"white",fontWeight:"bold",cursor:"pointer"}} />
             </div>
           </div>
 

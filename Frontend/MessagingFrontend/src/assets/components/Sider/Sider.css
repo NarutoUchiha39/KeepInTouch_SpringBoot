@@ -25,7 +25,7 @@
     grid-template-rows: 0.1fr 1fr 0.1fr;
 }
 
-.notification{
+.notification_sider{
     position: absolute;
     height: 5vh;
     top: 3%;

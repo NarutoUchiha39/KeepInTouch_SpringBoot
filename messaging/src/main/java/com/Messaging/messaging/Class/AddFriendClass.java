@@ -7,6 +7,11 @@ public class AddFriendClass {
     public User from;
     public String to;
 
+    @Override
+    public String toString(){
+        return "from: Username: "+from.getUserID()+" To: "+to;
+    }
+
     public AddFriendClass(User from, String to) {
         this.from = from;
         this.to = to;

@@ -7,6 +7,7 @@ import Navbar from './assets/components/navbar/navbar'
 import RouteProtection from './assets/components/RouteProtection/RouteProtection'
 import RedirectPage from './assets/components/RedirectPage/RedirectPage'
 import Sider from './assets/components/Sider/Sider'
+import FriendRequests from './assets/components/FriendRequests/FriendRequests'
 
 function App() {
 
@@ -35,12 +36,15 @@ function App() {
               <Route path='/' element={<RouteProtection userDetails={userDetails}><Main/></RouteProtection>} />
           </Route>
 
+          <Route path='/checkRequests' element={<RouteProtection userDetails={userDetails}><FriendRequests userDetails={userDetails} loading={loading} setLoading={setLoading}/></RouteProtection>}/>
+
           <Route element={<Navbar/>}>
               <Route path='/login' element={<Login loading={loading} setLoading={setLoading} userDetails={userDetails} setUserDetails={setUserDetails} notification={notification} setNotification={setNotification} />} />
 
               <Route path='/register' element={<Register loading={loading} setLoading={setLoading} userDetails={userDetails} notification={notification} setNotification={setNotification} />} />
 
               <Route path='/token' element={<RedirectPage notification={notification} setNotification={setNotification} userDetails={userDetails} setUserDetails={setUserDetails}/>} />
+
           </Route>
 
       </Routes>

@@ -1,0 +1,68 @@
+.friendRequest{
+
+    width: 100%;
+    height: 100vh;
+    background-color: #CCCC;
+    display: grid;
+    grid-template-columns: 0.2fr 1fr;
+}
+
+.control{
+    background-color: white;
+    border-radius: 1.1rem;
+    padding: 3rem;
+
+}
+
+.requests_control{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    font-size: large;
+}
+
+.row{
+    display: flex;
+    justify-content: space-between;
+
+}
+
+.username_profile{
+    display: flex;
+}
+
+.accept_reject{
+    display:flex ;
+}
+
+.accept{
+    margin-right: 1rem;
+}
+
+.profile{
+    width: 7rem;
+}
+
+.reject{
+    cursor: pointer;
+}
+
+.requests{
+    display:flex;
+    flex-direction: column;
+    justify-content: center;
+    padding: 2rem;
+}
+
+.details{
+
+    padding: 2rem;
+    background-color: white;
+    border-radius: 1.1rem;
+
+}
+
+.sent{
+    margin-bottom: 2rem;
+    cursor: pointer;
+}

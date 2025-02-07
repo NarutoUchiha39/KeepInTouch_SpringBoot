@@ -1,0 +1,9 @@
+.chatSection{
+    height: 100vh;
+    display: grid;
+    grid-template-rows: 0.142fr 1fr 0.2fr;
+}
+
+.top_chat{
+    background-color: #74bcff;
+}

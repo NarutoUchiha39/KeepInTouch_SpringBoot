@@ -2,15 +2,37 @@ import { Outlet, useNavigate } from "react-router"
 import "./Sider.css"
 import { LogoutOutlined,BellFilled,PlusCircleFilled } from "@ant-design/icons"
 import AddFriend from "../AddFriend/AddFriend"
-import { useState } from "react"
+import { useEffect, useState } from "react"
 import { TailSpin } from "react-loader-spinner"
 
 function Sider(props) {
   const [visible,setVisible] = useState(false)
+  const[friends,setFriends] = useState(null)
   let navigate = useNavigate()
 
+  function setChats(chatID,friends){
+      props.setFriendsChat(friends)
+      return navigate(`/chats`)
+  }
+  
+  async function getAllFriends(){
+        let res = await fetch("http://localhost:8080/getFriends",{
+          method:"POST",
+          body:JSON.stringify({
+            "id":props.userDetails.id
+          }),
+          headers:{"Authorization":`Bearer ${props.userDetails.token}`,"Content-type":"application/json"}
+        }).then(async(res)=>await res.json())
+
+        setFriends(res.friendsList)
+  }
+
+  useEffect(()=>{
+      getAllFriends()
+  },[])
+
   return (
-    <div className="sider_container">
+    <div className="sider_container" style={{backgroundColor:"#ECECEC"}}>
 
       {
               props.loading?
@@ -41,8 +63,9 @@ function Sider(props) {
 
           <div className="top" >
 
-            <div className="profile">
-                  <img src={`${props.userDetails.profile_link}`} style={{width:"3rem",height:"3rem",borderRadius:"1.1rem"}}/>
+            <div className="profile" style={{display:"flex"}}>
+                  <img src={`${props.userDetails.profile_link}`} style={{width:"3rem",height:"3rem",borderRadius:"1.1rem",marginRight:"2rem"}}/>
+                  <div className="username" style={{display:"flex",justifyContent:"center",alignItems:"center",color:"white",fontSize:"1.2rem"}}>{`${props.userDetails.username}`}</div>
             </div>
 
             <div className="logout" style={{display:"flex",justifyContent:"center", alignItems:"center"}}>
@@ -51,7 +74,34 @@ function Sider(props) {
 
           </div>
 
-          <div className="contacts">
+          <div className="contacts" style={{padding:"1rem"}}>
+            {
+             friends&&friends.map((value,index)=>{
+              if(value.to.userID != props.userDetails.id){
+                return(
+                  <>
+                      
+                      <div className="contact" onClick={()=>{setChats(value.message_id,value.to)}}  style={{cursor:"pointer", display:"flex",backgroundColor:"white",padding:"1rem",borderRadius:"1.1rem"}}>
+                            <img src={value.to.profileLink} style={{width:"3rem",borderRadius:"0.7rem",marginRight:"20%"}}/>         
+                            <div className="name" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>{value.to.username}</div>
+                          </div>
+                      
+                  </>
+                )
+              }else{
+                return(
+                  <>
+                
+                  <div className="contact" onClick={()=>{setChats(value.message_id,value.from)}} style={{cursor:"pointer",display:"flex",backgroundColor:"white",padding:"1rem",borderRadius:"1.1rem"}}>
+                        <img src={value.from.profileLink} style={{width:"3rem",borderRadius:"0.7rem",marginRight:"20%"}}/>         
+                        <div className="name" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>{value.from.username}</div>
+                  </div>
+                </>
+                )
+              }
+                
+            }) 
+            }
 
           </div>
 

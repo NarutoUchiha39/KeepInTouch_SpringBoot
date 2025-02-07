@@ -9,6 +9,43 @@ function FriendRequests(props) {
   let [sentVisible, setSentVisible] = useState(true)
   let [receivedVisible, setReceivedVisible] = useState(false)
 
+  async function changeStatus(event,to){
+        props.setLoading(true)
+        if(event == "accept"){
+
+          let res = await fetch("http://localhost:8080/changeStatus",{
+            method:"POST",
+            body:JSON.stringify({
+                  from:  parseInt(to),
+                  to:parseInt(props.userDetails.id),
+                  status:"accept"
+            }),
+            headers:{"Authorization":`Bearer ${props.userDetails.token}`,
+          "Content-type":"application/json"}
+          }).then(async(res)=>await res.json())
+          console.log(res)
+
+        }else if(event == "reject"){
+
+          let res = await fetch("http://localhost:8080/changeStatus",{
+            method:"POST",
+            body:JSON.stringify({
+                  from:  parseInt(to),
+                  to:parseInt(props.userDetails.id),
+                  status:"reject"
+            }),
+            headers:{"Authorization":`Bearer ${props.userDetails.token}`,"Content-type":"application/json"}
+          }).then(async(res)=>await res.json())
+          console.log(res)
+        }
+
+        props.setLoading(false)
+        props.setNotification({
+          message:`Request ${event}ed successfully`,
+          class:"success"
+        })
+  }
+
   async function getRequests() {
     props.setLoading(true)
     
@@ -33,6 +70,7 @@ function FriendRequests(props) {
     setSentRequests(res.allRequests)
     setReceived(res2.allRequests)
     props.setLoading(false)
+    
   }
 
   useEffect(() => {
@@ -41,6 +79,13 @@ function FriendRequests(props) {
 
   return (
     <>
+
+            {props.notification.message?<>
+                <div className={`notification_sider ${props.notification.class}`}>
+                      {props.notification.message}
+                </div>
+                </>:null
+            }
       
       <TailSpin
         visible={props.loading}
@@ -83,7 +128,7 @@ function FriendRequests(props) {
                   <div className="row" key={index}>
                     <div className="username_profile">
                       <div className="profile_image" style={{marginRight: "1rem"}}>
-                        <img className='profile' src={value.to.profileLink} alt="Profile" />
+                        <img className='profile' style={{width:"3rem",borderRadius:"0.7rem"}} src={value.from.profileLink} alt="Profile" />
                       </div>
                       <div className="username" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         {value.from.username}
@@ -91,12 +136,14 @@ function FriendRequests(props) {
                     </div>
 
                     <div className="accept_reject">
-                      <div className="accept" style={{cursor: "pointer", color: "green", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                      {value.status == "Pending"?<>
+                      <div onClick={()=>{changeStatus("accept",value.from.userID)}} className="accept" style={{cursor: "pointer", color: "green", display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <CheckOutlined/>
                       </div>
-                      <div className="reject" style={{cursor: "pointer", color: "red", display: "flex", alignItems: "center", justifyContent: "center"}}>
+                      <div className="reject" onClick={()=>{changeStatus("reject",value.from.userID)}} style={{cursor: "pointer", color: "red", display: "flex", alignItems: "center", justifyContent: "center"}}>
                         <CloseOutlined/>
                       </div>
+                      </>:(<div className="status" style={{display:"flex",justifyContent:"center",alignItems:"center"}}>{value.status+"ed"}</div> )}
                     </div>
                   </div>
                 )) : (
@@ -108,7 +155,7 @@ function FriendRequests(props) {
                     <div className="row" key={index}>
                     <div className="username_profile">
                       <div className="profile_image" style={{marginRight: "1rem"}}>
-                        <img className='profile' src={value.to.profileLink} alt="Profile" />
+                        <img className='profile' style={{width:"3rem",borderRadius:"0.7rem"}} src={value.to.profileLink} alt="Profile" />
                       </div>
                       <div className="username" style={{display: "flex", alignItems: "center", justifyContent: "center"}}>
                         {value.to.username}
@@ -116,7 +163,8 @@ function FriendRequests(props) {
                     </div>
 
                     <div className="status" style={{justifyContent:"center",alignItems:"center",display:"flex"}}>
-                      {value.status}
+                      {value.status == "Pending"?"Pending":value.status+"ed"}
+                      
                     </div>
                   </div>
                   </div>

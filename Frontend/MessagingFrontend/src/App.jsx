@@ -8,6 +8,7 @@ import RouteProtection from './assets/components/RouteProtection/RouteProtection
 import RedirectPage from './assets/components/RedirectPage/RedirectPage'
 import Sider from './assets/components/Sider/Sider'
 import FriendRequests from './assets/components/FriendRequests/FriendRequests'
+import Chats from './assets/components/Chats/Chats'
 
 function App() {
 
@@ -21,6 +22,8 @@ function App() {
     token:null
   })
 
+  const [friendsChat,setFriendsChat] = useState(null)
+
   const[notification,setNotification] = useState({
     message:null,
     class:null
@@ -32,11 +35,14 @@ function App() {
     <>
       <Routes>
 
-          <Route element={<Sider loading={loading} setLoading={setLoading} notification={notification} setNotification={setNotification} userDetails={userDetails} setUserDetails={setUserDetails}/>}>
+          <Route element={<Sider loading={loading} setLoading={setLoading} notification={notification} setNotification={setNotification} userDetails={userDetails} setUserDetails={setUserDetails} setFriendsChat={setFriendsChat}/>}>
               <Route path='/' element={<RouteProtection userDetails={userDetails}><Main/></RouteProtection>} />
+
+              <Route path='/chats' element={<RouteProtection userDetails={userDetails}><Chats friendsChat={friendsChat} userDetails={userDetails} loading={loading} setLoading={setLoading} notification={notification} setNotification={setNotification} /></RouteProtection>} />
           </Route>
 
-          <Route path='/checkRequests' element={<RouteProtection userDetails={userDetails}><FriendRequests userDetails={userDetails} loading={loading} setLoading={setLoading}/></RouteProtection>}/>
+          <Route path='/checkRequests' element={<RouteProtection userDetails={userDetails}><FriendRequests userDetails={userDetails} loading={loading} setLoading={setLoading} notification={notification} setNotification={setNotification}/></RouteProtection>}/>
+
 
           <Route element={<Navbar/>}>
               <Route path='/login' element={<Login loading={loading} setLoading={setLoading} userDetails={userDetails} setUserDetails={setUserDetails} notification={notification} setNotification={setNotification} />} />

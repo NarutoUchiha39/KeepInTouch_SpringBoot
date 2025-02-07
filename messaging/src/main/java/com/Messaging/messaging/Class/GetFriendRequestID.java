@@ -2,11 +2,14 @@ package com.Messaging.messaging.Class;
 
 public class GetFriendRequestID {
     public Long id;
+    public Long to;
 
-    public GetFriendRequestID() {}
-
-    public GetFriendRequestID(Long id) {
+    public GetFriendRequestID(Long id, Long from) {
         this.id = id;
+        this.to = from;
+    }
+
+    public GetFriendRequestID() {
     }
 
     public Long getId() {
@@ -15,5 +18,13 @@ public class GetFriendRequestID {
 
     public void setId(Long id) {
         this.id = id;
+    }
+
+    public Long getTo() {
+        return to;
+    }
+
+    public void setTo(Long from) {
+        this.to = from;
     }
 }

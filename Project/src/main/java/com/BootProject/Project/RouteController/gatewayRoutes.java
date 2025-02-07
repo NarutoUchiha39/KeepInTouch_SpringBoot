@@ -31,4 +31,24 @@ public class gatewayRoutes {
     public RouterFunction<ServerResponse> checkReceivedRequests(){
         return route("checkReceivedRequests").POST("/ReceivedRequests",http("http://localhost:8081/ReceivedRequests")).build();
     }
+
+    @Bean
+    public RouterFunction<ServerResponse> getAllFriends(){
+        return route("getFriends").POST("/getFriends",http("http://localhost:8081/getFriends")).build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse> changeStatus(){
+        return route("ChangeStatus").POST("/changeStatus",http("http://localhost:8081/changeStatus")).build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse>senMessage(){
+        return route("SendMessage").POST("/sendMessage",http("http://localhost:8081/sendMessage")).build();
+    }
+
+    @Bean
+    public RouterFunction<ServerResponse>getMessages(){
+        return route("getMessages").POST("/getMessages",http("http://localhost:8081/getMessages")).build();
+    }
 }

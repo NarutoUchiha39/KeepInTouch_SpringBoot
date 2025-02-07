@@ -22,6 +22,10 @@ public class CorsConfig extends CorsConfiguration{
                 registry.addMapping("/register").allowedOrigins("*");
                 registry.addMapping("/").allowedOrigins("*");
                 registry.addMapping("/addFriend").allowedOrigins("*");
+                registry.addMapping("/changeStatus").allowedOrigins("*");
+                registry.addMapping("/getFriends").allowedOrigins("*");
+                registry.addMapping("/sendMessage").allowedOrigins("*");
+                registry.addMapping("/getMessages").allowedOrigins("*");
 
             }
         };

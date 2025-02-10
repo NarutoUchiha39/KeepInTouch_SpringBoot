@@ -6,6 +6,7 @@ The website has the following features:<br>
 3. *View the sent and recieved friend request*
 4. *Send and recieve friend text message*
 5. *Send media (Images,Pdf documents)*
+6. *Email verification*
 
 #### *Sounds interesting? Let's dive into the nitty gritty now, shall we?*
 <br>
@@ -13,9 +14,19 @@ The website has the following features:<br>
 ### <p align='center'> Made with ❤️ using </p>
 
 <p align='center'>
-    <img with=120px height=120px style="margin-right:30px" src='https://github.com/NarutoUchiha39/KeepInTouch/assets/104666748/bb313e1a-8d63-4626-8c4c-87241f0a401b'/>
+    <img with=120px height=120px style="margin-right:30px" src='https://github.com/user-attachments/assets/c66ba914-a498-4e4f-a00f-cf510c1e2b14'/>
     <img with=120px height=120px style="margin-right:30px" src='https://github.com/NarutoUchiha39/KeepInTouch/assets/104666748/1dd75dfc-c7be-4aed-8d30-5cceeefa0793'/>
     <img with=120px height=120px style="margin-right:30px" src='https://github.com/NarutoUchiha39/KeepInTouch/assets/104666748/76d209bc-3549-40d9-8732-2c8edca23a62'/>
-
-
 </p>
+
+<br><br><br>
+* ### <p>*Flow of requests*</p>
+<br><br>
+<p align='center'>
+    <img  src='https://github.com/user-attachments/assets/a7d926ef-e17f-4ae9-bc7d-50d3731cac19'/>
+</p>
+
+<br><br><br>
+* ### <p>*Tables used in the project*</p>
+<br><br>
+<img src='https://github.com/user-attachments/assets/4002e1ce-1116-41d1-bf92-0811bc413d77'/>

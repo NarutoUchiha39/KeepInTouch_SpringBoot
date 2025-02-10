@@ -75,8 +75,10 @@ public class FriendService {
         }
         messages1.setFrom(user3.getBody().getUse());
         messages1.setTo(user2.getBody().getUse());
+
         if(messages.getFile() != null){
-            String fileName = messages.getFile().getOriginalFilename()+"_"+System.currentTimeMillis()+"_"+messages.getFrom();
+            String[] filename = messages.getFile().getOriginalFilename().split("\\.");
+            String fileName = filename[0]+"_"+System.currentTimeMillis()+"_"+user3.getBody().getUse().getUserID();
             File file1 = Files.createTempFile(fileName, null).toFile();
             InputStream fileContent= null;
             OutputStream out = null;
@@ -88,6 +90,11 @@ public class FriendService {
 
                 while ((read = fileContent.read(bytes)) != -1) {
                     out.write(bytes, 0, read);
+                }
+
+                if (!(messages.getFile().getContentType().equals("application/pdf")
+                ||messages.getFile().getContentType().equals("image/png") || messages.getFile().getContentType().equals("image/jpeg") )) {
+                    return new GenericResponse("File type not allowed!",400);
                 }
 
                 Map params = ObjectUtils.asMap("public_id", fileName,

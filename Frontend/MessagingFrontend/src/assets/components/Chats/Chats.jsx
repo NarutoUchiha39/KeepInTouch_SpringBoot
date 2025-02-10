@@ -2,7 +2,7 @@ import React, { useEffect, useState } from 'react'
 import "./Chats.css"
 import { useParams } from 'react-router'
 import TextArea from 'antd/es/input/TextArea'
-import { PlusCircleFilled, SendOutlined } from '@ant-design/icons'
+import { DownloadOutlined, FilePdfOutlined, PlusCircleFilled, SendOutlined } from '@ant-design/icons'
 import { Button } from 'antd'
 
 function Chats(props) {
@@ -97,21 +97,44 @@ function Chats(props) {
             </div>
       </div>
 
-      <div className="middle_chat" style={{padding:"2rem"}}>
+      <div className="middle_chat" style={{padding:"2rem",overflow:"scroll",overflowX:"hidden"}}>
                     {
                       chats&&chats.map((value,index)=>{
-                        console.log(value.from)
+                        
                         if(value.from == parseInt(props.userDetails.id)){
                             return  <div className='messages' style={{display:"flex",justifyContent:"end",marginBottom:"2rem"}}>
                                   <div className="message" style={{padding:"1rem",backgroundColor:"white",borderRadius:"1.1rem"}}>
+                                      
+                                      {value.link?(
+                                        value.link.split(".")[value.link.split(".").length-1]=="png" || value.link.split(".")[value.link.split(".").length-1]=="jpeg"?
+                                        <img src={value.link} style={{width:"200px",height:"80px"}}/>:
+                                        <div className="file_download" style={{display:"flex",flexDirection:"column",marginBottom:"1rem"}}>
+                                          <FilePdfOutlined style={{fontSize:"40px",marginBottom:"1rem"}}/>
+                                          <div className="download" style={{display:"flex"}}>
+                                            <div className="fileName" style={{marginRight:"1rem"}}>{decodeURIComponent(value.link.split("_")[0].split("/")[value.link.split("_")[0].split("/").length-1])}</div>
+                                            <DownloadOutlined style={{fontSize:"20px"}}/>
+                                          </div>
+                                        </div>
+                                        
+                                      ):null}
                                       {value.message}
                                   </div>
 
-                                  
                               </div>
                         }else{
                           return <div className='messages' style={{display:"flex",justifyContent:"start",marginBottom:"2rem"}}>
                                     <div className="message" style={{padding:"1rem",backgroundColor:"lightsteelblue",borderRadius:"1.1rem"}}>
+                                      
+                                    {value.link?(
+                                        value.link.split(".")[value.link.split(".").length-1]=="png" || value.link.split(".")[value.link.split(".").length-1]=="jpeg"?
+                                        <img src={value.link} style={{width:"200px",height:"80px"}}/>:<div className="file_download" style={{display:"flex",flexDirection:"column"}}>
+                                        <FilePdfOutlined style={{fontSize:"40px",marginBottom:"1rem"}}/>
+                                        <div className="download" style={{display:"flex"}}>
+                                          <div className="fileName" style={{marginRight:"1rem"}}>{decodeURIComponent(value.link.split("_")[0].split("/")[value.link.split("_")[0].split("/").length-1])}</div>
+                                          <DownloadOutlined style={{fontSize:"20px"}}/>
+                                        </div>
+                                      </div>
+                                      ):null}
                                         {value.message}
                                     </div>
                                     

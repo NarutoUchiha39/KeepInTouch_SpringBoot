@@ -54,6 +54,10 @@ The website has the following features:<br>
    * The ddl command of the messaging microservice is set to 'update' so that the user_profile model is not created again.
    * In order to use the shared model, we make the microservice and use the command mvn install in order to install the service in our local maven repository
    * The shared model is included in the messaging microservice via the pom.xml file
+
+
+* ### <p>*Interested? Here's a small demo*</p>
+[KeepInTouch.mp4](https://github.com/user-attachments/assets/2f104c77-f476-43bc-8ee6-7f57fcad8c28)
    
 * ### <p>*Flow of requests*</p>
 <br><br>
